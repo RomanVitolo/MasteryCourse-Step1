@@ -5,22 +5,20 @@ using UnityEngine;
 
 [RequireComponent(typeof(AgentGrounding))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class AgentController : MonoBehaviour
+public class AgentController : MonoBehaviour, IMove
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private float jumpForce = 200f;
     Rigidbody2D _rb;
     AgentGrounding _agentGrounding;
-    SpriteRenderer _spriteRenderer;
+   public float Speed { get; private set; }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _agentGrounding = GetComponent<AgentGrounding>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         SetInput();
@@ -28,18 +26,14 @@ public class AgentController : MonoBehaviour
         {
             _rb.AddForce(Vector2.up * jumpForce);
         }
-        Debug.Log(_agentGrounding.IsGrounded);
     }
     
     void SetInput()
     { 
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
+        Speed = horizontal;
+        
         Vector3 movement = new Vector3(horizontal, 0);
-        //transform.Translate(movement * speed * Time.deltaTime);
-        transform.position += movement * speed * Time.deltaTime;
-        
-        
+        transform.position += movement * movementSpeed * Time.deltaTime;   //transform.Translate(movement * speed * Time.deltaTime);
     }
 }
