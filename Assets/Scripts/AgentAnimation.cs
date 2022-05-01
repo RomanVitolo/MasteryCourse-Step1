@@ -21,7 +21,6 @@ public class AgentAnimation : MonoBehaviour
     {
         float speed = _move.Speed;
         _animator.SetFloat("Speed", Mathf.Abs(speed));
-        Debug.Log(speed);
         if (speed != 0)
         {
             _spriteRenderer.flipX = speed > 0;
