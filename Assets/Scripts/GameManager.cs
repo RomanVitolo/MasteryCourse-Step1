@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /*private void Update()
+    {
+        System.Threading.Thread.Sleep(50);
+    }*/
+
     internal void KillPlayer()
     {
         Lives--;
@@ -39,8 +44,20 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
+        else
+        {
+            SendPlayerToCheckPoint();
+        }
     }
-    
+
+     void SendPlayerToCheckPoint()
+     {
+         var _checkpointManager = FindObjectOfType<CheckPointManager>();
+         var checkpoint = _checkpointManager.GetLastCheckPointThatWasPassed();
+         var _player = FindObjectOfType<AgentController>();
+         _player.transform.position = checkpoint.transform.position;
+     }
+
     internal void CoinCollected()
     {
         coins++;

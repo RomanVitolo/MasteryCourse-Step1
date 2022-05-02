@@ -18,10 +18,13 @@ public class AgentController : MonoBehaviour, IMove
         _rb = GetComponent<Rigidbody2D>();
         _agentGrounding = GetComponent<AgentGrounding>();
     }
-    
-    void Update()
+    void FixedUpdate()
     {
         SetInput();
+    }
+    
+    private void Update()
+    {
         if (Input.GetButtonDown("Fire1") && _agentGrounding.IsGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce);
