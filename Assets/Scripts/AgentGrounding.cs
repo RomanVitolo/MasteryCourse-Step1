@@ -8,7 +8,7 @@ public class AgentGrounding : MonoBehaviour
     [SerializeField] private Transform _rightFoot;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] float maxDistance = 3f;
-    public bool IsGrounded{ get; private set; }
+    [field: SerializeField] public bool IsGrounded{ get; private set; }
    
     void Update()
     {

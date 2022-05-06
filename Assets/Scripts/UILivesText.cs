@@ -19,7 +19,6 @@ public class UILivesText : MonoBehaviour
         
     }
 
-
     private void HandleOnLivesChanged(int livesRemaining)
     {
         tmproText.text = livesRemaining.ToString();

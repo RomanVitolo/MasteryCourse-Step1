@@ -7,11 +7,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AgentController : MonoBehaviour, IMove
 {
+    [field: SerializeField] public float Speed { get; private set; }
+    
     [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private float jumpForce = 200f;
+    
     Rigidbody2D _rb;
     AgentGrounding _agentGrounding;
-   public float Speed { get; private set; }
 
     private void Awake()
     {
@@ -25,7 +27,7 @@ public class AgentController : MonoBehaviour, IMove
     
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && _agentGrounding.IsGrounded)
+        if (Input.GetButtonDown("Jump") && _agentGrounding.IsGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce);
         }

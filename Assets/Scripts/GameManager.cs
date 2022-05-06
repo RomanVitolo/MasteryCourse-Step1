@@ -8,10 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     
-    public int Lives { get; private set; }
-    public int coins { get; private set; }
+    [field: SerializeField] public int Lives { get; private set; }
+    [field: SerializeField] public int coins { get; private set; }
     
-
     public event Action<int> OnLivesChanged; 
     public event Action<int> OnCoinsChanged; 
 
@@ -50,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-     void SendPlayerToCheckPoint()
+     void SendPlayerToCheckPoint() //Obtengo el ultimo checkpoint y envio al player a esa posicion. 
      {
          var _checkpointManager = FindObjectOfType<CheckPointManager>();
          var checkpoint = _checkpointManager.GetLastCheckPointThatWasPassed();

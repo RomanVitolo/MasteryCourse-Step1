@@ -11,9 +11,8 @@ public class CheckPointManager : MonoBehaviour
     {
         _checkPoints = GetComponentsInChildren<CheckPoint>();
     }
-
-    public CheckPoint GetLastCheckPointThatWasPassed()
+    internal CheckPoint GetLastCheckPointThatWasPassed()
     {
-        return _checkPoints.Last(t => t.Passed);
+        return _checkPoints.Last(t => t.Passed);   //Devuelve el Ultimo Checkpoint por el que paso el player. El ultimo checkpoint del Array
     }
 }
