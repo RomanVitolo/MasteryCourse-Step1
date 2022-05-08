@@ -6,6 +6,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     [field: SerializeField] public bool Passed { get; private set; }
+    [field: SerializeField] public bool BackUpCheckPoint { get; private set; }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var _player = collision.GetComponent<AgentController>();

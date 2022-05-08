@@ -6,6 +6,7 @@ using UnityEngine;
 public class CheckPointManager : MonoBehaviour
 {
     private CheckPoint[] _checkPoints;
+    [SerializeField] private Transform validateCheckpoint;
     
     private void Start()
     {
@@ -13,6 +14,6 @@ public class CheckPointManager : MonoBehaviour
     }
     internal CheckPoint GetLastCheckPointThatWasPassed()
     {
-        return _checkPoints.Last(t => t.Passed);   //Devuelve el Ultimo Checkpoint por el que paso el player. El ultimo checkpoint del Array
+        return _checkPoints.Last(t => t.Passed);
     }
 }

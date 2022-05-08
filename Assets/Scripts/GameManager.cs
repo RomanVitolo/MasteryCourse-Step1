@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
          var _player = FindObjectOfType<AgentController>();
          _player.transform.position = checkpoint.transform.position;
      }
+     
 
     internal void CoinCollected()
     {
@@ -72,4 +73,7 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene(0);
     }
+
+    
+
 }

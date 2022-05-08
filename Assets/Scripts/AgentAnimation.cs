@@ -25,6 +25,5 @@ public class AgentAnimation : MonoBehaviour
         {
             _spriteRenderer.flipX = speed > 0;
         }
-        
     }
 }

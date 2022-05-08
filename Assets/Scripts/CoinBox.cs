@@ -28,7 +28,7 @@ public class CoinBox : MonoBehaviour
         Debug.Log(other.contacts[0].normal);
         var randomClips = _Clips[Random.Range(0, _Clips.Length)];
         
-        if (remainingCoins > 0 && WasHitByPlayer(other) && WasHiyFromBottomSide(other))
+        if (remainingCoins > 0 && other.WasHitByPlayer() && other.WasHitFromBottomSide())
         {
             _animator.SetTrigger(randomClips);
             GameManager.Instance.CoinCollected();
@@ -40,15 +40,5 @@ public class CoinBox : MonoBehaviour
                 _disabledSprite.enabled = true;
             }
         }
-    }
-
-    private bool WasHitByPlayer(Collision2D other)
-    {
-        return other.collider.GetComponent<AgentController>() != null;
-    }
-
-    private bool WasHiyFromBottomSide(Collision2D other)
-    {
-        return other.contacts[0].normal.y > 0.5f;
     }
 }

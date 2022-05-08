@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CoinAudio : MonoBehaviour
 {
-    AudioSource _audioSource;
+   AudioSource _audioSource;
 
     private void Awake()
     {
@@ -14,6 +14,16 @@ public class CoinAudio : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnCoinsChanged += (coins) => _audioSource.Play();
+        GameManager.Instance.OnCoinsChanged += PlayAudioCoin;
+    }
+    
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnCoinsChanged -= PlayAudioCoin;
+    }
+    
+    private void PlayAudioCoin(int coins)
+    {
+        _audioSource.Play();
     }
 }
