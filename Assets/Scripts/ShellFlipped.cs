@@ -33,10 +33,10 @@ public class ShellFlipped : MonoBehaviour
             if (other.WasSide())
             {
                 LaunchShell(other);
-                var breakable = other.collider.GetComponent<BreakableBox>();
-                if (breakable != null)
+                var takeShellHits = other.collider.GetComponent<ITakeShellHits>();
+                if (takeShellHits != null)
                 {
-                    Destroy(breakable.gameObject);
+                    takeShellHits.HandleShellHit(this);
                 }
             }
         }

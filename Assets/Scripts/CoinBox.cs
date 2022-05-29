@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class CoinBox : MonoBehaviour
+public class CoinBox : MonoBehaviour, ITakeShellHits
 {
     [SerializeField] private SpriteRenderer _enabledSprite;
     [SerializeField] private SpriteRenderer _disabledSprite;
@@ -23,20 +23,33 @@ public class CoinBox : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        var randomClips = _Clips[Random.Range(0, _Clips.Length)];
-        
         if (remainingCoins > 0 && other.WasHitByPlayer() && other.WasHitFromBottomSide())
         {
-            _animator.SetTrigger(randomClips);
-            GameManager.Instance.CoinCollected();
-            remainingCoins--;
-            Debug.Log(randomClips);
-
-            if (remainingCoins <= 0)
             {
-                _enabledSprite.enabled = false;
-                _disabledSprite.enabled = true;
+                TakeCoin();
             }
+        }
+    }
+
+    private void TakeCoin()
+    {
+        var randomClips = _Clips[Random.Range(0, _Clips.Length)];
+        GameManager.Instance.CoinCollected();
+        remainingCoins--;
+        _animator.SetTrigger(randomClips);
+
+        if (remainingCoins <= 0)
+        {
+            _enabledSprite.enabled = false;
+            _disabledSprite.enabled = true;
+        }
+    }
+
+    public void HandleShellHit(ShellFlipped _shellFlipped)
+    {
+        if (remainingCoins > 0)
+        {
+            TakeCoin();
         }
     }
 }
