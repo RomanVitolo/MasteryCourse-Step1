@@ -11,9 +11,8 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public int Lives { get; private set; }
     [field: SerializeField] public int coins { get; private set; }
     
-    public event Action<int> OnLivesChanged; 
-    public event Action<int> OnCoinsChanged; 
-
+    public event Action<int> OnLivesChanged;
+    public event Action<int> OnCoinsChanged;
 
     private void Awake()
     {
@@ -73,7 +72,4 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene(0);
     }
-
-    
-
 }

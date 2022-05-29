@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class SawBlade : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     [SerializeField] private Transform startPosition;
     [SerializeField] private Transform endPosition;
-    [SerializeField] private Transform spriteBladeeSaw;
+    [FormerlySerializedAs("spriteBladeeSaw")] 
+    [SerializeField] private Transform sprite;
+    [SerializeField] private float speed = 3f;
     
     private float positionPercent;
-    private float speed = 3f;
     private int direction = 1;
     private void Update()
     {
@@ -19,7 +21,7 @@ public class SawBlade : MonoBehaviour
         
         positionPercent += Time.deltaTime * direction * speedForDistance;
 
-        spriteBladeeSaw.position = Vector3.Lerp(startPosition.position, endPosition.position, positionPercent);
+        sprite.position = Vector3.Lerp(startPosition.position, endPosition.position, positionPercent);
 
         if (positionPercent >= 1 && direction == 1)
         {

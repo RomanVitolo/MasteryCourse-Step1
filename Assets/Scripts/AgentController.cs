@@ -41,4 +41,9 @@ public class AgentController : MonoBehaviour, IMove
         Vector3 movement = new Vector3(horizontal, 0);
         transform.position += movement * movementSpeed * Time.deltaTime;   //transform.Translate(movement * speed * Time.deltaTime);
     }
+
+    public void Bounce()
+    {
+        _rb.AddForce(Vector2.up * jumpForce);
+    }
 }

@@ -7,8 +7,11 @@ public class Coin : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
-        GameManager.Instance.CoinCollected();
-        Debug.Log(GameManager.Instance.coins);
+        if (other.GetComponent<AgentController>() != null)
+        {
+            Destroy(gameObject);
+            GameManager.Instance.CoinCollected();
+            Debug.Log(GameManager.Instance.coins);
+        }
     }
 }
