@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AgentGrounding : MonoBehaviour
 {
-    [SerializeField] private Transform _leftFoot;
-    [SerializeField] private Transform _rightFoot;
+    [SerializeField] private Transform[] positions;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] float maxDistance = 3f;
 
@@ -15,12 +14,11 @@ public class AgentGrounding : MonoBehaviour
    
     void Update()
     {
-        CheckFootForGrounding(_leftFoot);
-        if (IsGrounded == false)
+        foreach (var position in positions)
         {
-            CheckFootForGrounding(_rightFoot);
+            CheckFootForGrounding(position);
+            if (IsGrounded) break;
         }
-        StickMovingObject();
     }
 
     private void StickMovingObject()
@@ -47,6 +45,10 @@ public class AgentGrounding : MonoBehaviour
 
         if (rayCastHit.collider != null)
         {
+            if (rayCastHit.collider.transform != null)
+            {
+                groundedObjectLastPosition = rayCastHit.collider.transform.position;
+            }
             groundedObject = rayCastHit.collider.transform;
             IsGrounded = true;
         }

@@ -21,5 +21,4 @@ public static class Collision2DExtensions
     {
         return other.contacts[0].normal.x < -0.5f || other.contacts[0].normal.x > 0.5f;
     }
-    
 }
