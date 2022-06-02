@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class ShellFlipped : MonoBehaviour
 {
     [SerializeField] private float shellSpeed = 5f;
