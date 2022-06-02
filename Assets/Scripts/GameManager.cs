@@ -55,9 +55,8 @@ public class GameManager : MonoBehaviour
          var _player = FindObjectOfType<AgentController>();
          _player.transform.position = checkpoint.transform.position;
      }
-     
 
-    internal void CoinCollected()
+     internal void CoinCollected()
     {
         coins++;
         OnCoinsChanged?.Invoke(coins);

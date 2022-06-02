@@ -11,6 +11,7 @@ public class AgentGrounding : MonoBehaviour
     private Transform groundedObject;
     private Vector3? groundedObjectLastPosition;
     [field: SerializeField] public bool IsGrounded{ get; private set; }
+    [field: SerializeField] public Vector2 groundedDirection { get; private set; }
    
     void Update()
     {
@@ -20,7 +21,6 @@ public class AgentGrounding : MonoBehaviour
             if (IsGrounded) break;
         }
     }
-
     private void StickMovingObject()
     {
         if (groundedObject != null)
@@ -40,8 +40,8 @@ public class AgentGrounding : MonoBehaviour
 
     private void CheckFootForGrounding(Transform _foot)
     {
-        var rayCastHit = Physics2D.Raycast(_foot.position, Vector2.down, maxDistance, _layerMask);
-        Debug.DrawRay(_foot.position, Vector3.down * maxDistance, Color.red);
+        var rayCastHit = Physics2D.Raycast(_foot.position, _foot.forward, maxDistance, _layerMask);
+        Debug.DrawRay(_foot.position, _foot.forward * maxDistance, Color.red);
 
         if (rayCastHit.collider != null)
         {
@@ -51,6 +51,7 @@ public class AgentGrounding : MonoBehaviour
             }
             groundedObject = rayCastHit.collider.transform;
             IsGrounded = true;
+            groundedDirection = _foot.forward;
         }
         else
         {

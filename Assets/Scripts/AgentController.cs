@@ -10,7 +10,8 @@ public class AgentController : MonoBehaviour, IMove
     [field: SerializeField] public float Speed { get; private set; }
     
     [SerializeField] private float movementSpeed = 4f;
-    [SerializeField] private float jumpForce = 200f;
+    [SerializeField] private float jumpForce = 300f;
+    [SerializeField] private float wallJumpForce = 50f;
     
     Rigidbody2D _rb;
     AgentGrounding _agentGrounding;
@@ -30,6 +31,11 @@ public class AgentController : MonoBehaviour, IMove
         if (Input.GetButtonDown("Jump") && _agentGrounding.IsGrounded)
         {
             _rb.AddForce(Vector2.up * jumpForce);
+            
+            if (_agentGrounding.groundedDirection != Vector2.down)
+            {
+                _rb.AddForce(_agentGrounding.groundedDirection * -1 * wallJumpForce);
+            }
         }
     }
     
